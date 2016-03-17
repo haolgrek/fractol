@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 11:32:29 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/17 14:26:57 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/17 18:17:57 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct		s_mlx
 	int				maxx;
 	int				maxy;
 	int				color;
-	t_data			*data;
+	char			*data;
 }					t_mlx;
 
 void				bresenham_x(t_mlx *m, t_data *data);
@@ -72,7 +72,7 @@ t_data				*parse(char *file);
 t_data				*setlst(int fd, char *line);
 t_mlx				*init_mlx(char *file);
 void				other_events(int keycode, t_mlx *m);
-int					*fillintab(t_data *file, t_mlx *m, int *intab);
+int					*fillintab(char *file, t_mlx *m, int *intab);
 int					*blacktab(t_mlx *m);
 int					keys(int keycode, t_mlx *m);
 t_data				*ft_create_elem(int *tab, int len, int y);

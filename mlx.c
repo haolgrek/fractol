@@ -6,11 +6,11 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/17 14:27:02 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/17 18:18:08 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 /*void	directions(int keycode, t_mlx *m)
 {
@@ -57,7 +57,7 @@ int		*fillintab(char *file, t_mlx *m, int *intab)
 		mendelbrot(m);
 	else if (ft_strcmp(file, "burningship") == 0)
 		burningship(m);
-	return (intab)
+	return (intab);
 }
 
 /*	int	i;

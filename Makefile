@@ -6,14 +6,14 @@
 #    By: rluder <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/15 13:41:47 by rluder            #+#    #+#              #
-#    Updated: 2016/03/15 14:30:36 by rluder           ###   ########.fr        #
+#    Updated: 2016/03/17 18:18:43 by rluder           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 OBJET_NAME = $(SRC_NAME:.c=.o)
 	CC = gcc
-	EXE = fdf
-	LIBRARY = libfdf.a
+	EXE = fractol
+	LIBRARY = libfractol.a
 	MAKELIB = make -C ./libft
 	CLEANLIB = make clean -C ./libft
 	FCLEANLIB = make fclean -C ./libft
