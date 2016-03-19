@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 11:32:29 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/17 18:17:57 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/19 23:03:41 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct		s_mlx
 	int				maxx;
 	int				maxy;
 	int				color;
+	int				*colors;
 	char			*data;
 }					t_mlx;
 
@@ -80,5 +81,8 @@ int					checkline(char *str);
 void				other_events(int keycode, t_mlx *m);
 void				reset(t_mlx *m);
 int					*zerotab(t_mlx *m);
+void				mandelbrot(t_mlx *m, int *intab);
+void				julia(t_mlx *m);
+void				burningship(t_mlx *m);
 
 #endif

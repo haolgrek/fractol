@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/17 18:18:08 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/19 23:09:36 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,43 @@ int		keys(int keycode, t_mlx *m)
 	return (0);
 }*/
 
+int		*init_colors()
+{
+	int	*cols;
+	int	i;
+	int	r;
+	int	g;
+	int	b;
+
+	i = 0;
+	cols = malloc (sizeof(int) * 50 + 1);
+	while (i < 50)
+	{
+		r = 0x00FF0000 * 50 / (i + 51);
+		g = 0x0000FF00 * 50 / (i + 51);
+		b = 0x000000FF * 50 / (i + 51);
+		cols[i] = b + r + g;
+		i++;
+	}
+	cols[50] = 0;
+	return (cols);
+}
+
 int		*fillintab(char *file, t_mlx *m, int *intab)
 {
-	if (ft_strcmp(file, "julia") == 0)
-		julia(m);
-	else if (ft_strcmp(file, "mendelbrot") == 0)
-		mendelbrot(m);
-	else if (ft_strcmp(file, "burningship") == 0)
-		burningship(m);
+//	if (ft_strcmp(file, "julia") == 0)
+//		julia(m);
+	m->colors = init_colors();
+	if (ft_strcmp(file, "mandelbrot") == 0)
+	{
+		ft_putendl("in fillintab");
+		mandelbrot(m, intab);
+		intab[0] = 0xFFFFFF;
+		intab[1025] = 0xFFFFFF;
+		ft_putendl("out fillintab");
+	}
+//	else if (ft_strcmp(file, "burningship") == 0)
+//		burningship(m);
 	return (intab);
 }
 
@@ -95,12 +124,12 @@ t_mlx	*init_mlx(char *file)
 	m->color = 16707215;
 	m->data = file;
 	m->mlx = mlx_init();
-	m->xsize = 2048;
+	m->xsize = 1024;
 	m->ysize = 1024;
 //	m->maxx = max[0];
 //	m->maxy = max[1];
-	m->imgx = 75;
-	m->imgy = 75;
+	m->imgx = 0;
+	m->imgy = 0;
 //	m->gap = 1;
 	m->win = mlx_new_window(m->mlx, m->xsize, m->ysize, "Fractol");
 	m->img = mlx_new_image(m->mlx, m->xsize, m->ysize);

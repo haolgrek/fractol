@@ -6,7 +6,7 @@
 #    By: rluder <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/15 13:41:47 by rluder            #+#    #+#              #
-#    Updated: 2016/03/17 18:18:43 by rluder           ###   ########.fr        #
+#    Updated: 2016/03/19 19:24:31 by rluder           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJET_NAME = $(SRC_NAME:.c=.o)
 	FCLEANLIB = make fclean -C ./libft
 	MAIN = main.o
 	CFLAGS = -Werror -Wextra -Werror
-	SRC_NAME = main.c bresenham.c get_next_line.c mlx.c list.c zerotab.c
+	SRC_NAME = main.c algos.c mlx.c
 
 all : $(EXE)
 
