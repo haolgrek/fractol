@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 11:32:29 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/21 17:46:12 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/21 21:00:06 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int					checkline(char *str);
 void				other_events(int keycode, t_mlx *m);
 void				reset(t_mlx *m);
 int					*zerotab(t_mlx *m);
-void				mandelbrot(t_mlx *m);
+void				mandelbrot(t_mlx *m, int *intab);
 void				julia(t_mlx *m);
 void				burningship(t_mlx *m);
 

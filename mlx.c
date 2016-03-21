@@ -6,13 +6,13 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/21 19:28:46 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/21 23:35:01 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*void	directions(int keycode, t_mlx *m)
+void	directions(int keycode, t_mlx *m)
 {
 	if (keycode == 126)
 		m->imgy -= 10;
@@ -41,13 +41,13 @@ int		keys(int keycode, t_mlx *m)
 		m->height--;
 	else if (keycode == 91 && m->height < 3)
 		m->height++;
-	else if (keycode == 15)
-		reset(m);
+//	else if (keycode == 15)
+//		reset(m);
 	mlx_clear_window(m->mlx, m->win);
-	other_events(keycode, m);
+//	other_events(keycode, m);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
 	return (0);
-}*/
+}
 
 int		*init_colors()
 {
@@ -87,12 +87,13 @@ int		*fillintab(char *file, t_mlx *m, int *intab)
 {
 //	if (ft_strcmp(file, "julia") == 0)
 //		julia(m);
-	m->colors = init_colors();
+//	m->colors = init_colors();
 	if (ft_strcmp(file, "mandelbrot") == 0)
 	{
 		init_mandelbrot(m);
 		ft_putendl("in fillintab");
-		mandelbrot(m);
+		mandelbrot(m, intab);
+		m->intab = malloc(sizeof(int) * 900000);
 		intab[0] = 0xFFFFFF;
 		intab[1025] = 0xFFFFFF;
 		ft_putendl("out fillintab");
@@ -102,30 +103,6 @@ int		*fillintab(char *file, t_mlx *m, int *intab)
 	return (intab);
 }
 
-/*	int	i;
-	int	x;
-	int	y;
-
-	while (file)
-	{
-		i = 0;
-		while (i < (file->len - 1))
-		{
-			x = i * m->gap - file->tab[i] * m->height;
-			y = file->y * m->gap * m->xsize - file->tab[i] * m->height *
-				m->xsize;
-			if ((x + y + 135300) >= 0)
-			{
-				intab[x + y + 135300] = 0xFFFFFF
-					- (file->tab[i] * 256);
-			}
-			i++;
-		}
-		file = file->next;
-	}
-	return (intab);
-}*/
-/*
 int		**ft_create_btab(t_mlx *m)
 {
 	int	**btab;
@@ -135,12 +112,12 @@ int		**ft_create_btab(t_mlx *m)
 	btab = (int**)malloc(sizeof(int*) * ((int)m->image_y + 1));
 	while (i < (int)m->image_y)
 	{
-		btab[i] = &m->intab[i * (int)image_x]
+		btab[i] = &m->intab[i * (int)m->image_x];
 		i++;
 	}
 	btab[i] = NULL;
 	return (btab);
-}*/
+}
 
 t_mlx	*init_mlx(char *file)
 {
@@ -153,8 +130,8 @@ t_mlx	*init_mlx(char *file)
 	m->color = 16707215;
 	m->data = file;
 	m->mlx = mlx_init();
-	m->xsize = 1024;
-	m->ysize = 1024;
+	m->xsize = 1000;
+	m->ysize = 1000;
 //	m->maxx = max[0];
 //	m->maxy = max[1];
 	m->imgx = 0;
@@ -162,8 +139,7 @@ t_mlx	*init_mlx(char *file)
 //	m->gap = 1;
 	m->win = mlx_new_window(m->mlx, m->xsize, m->ysize, "Fractol");
 	m->img = mlx_new_image(m->mlx, m->xsize, m->ysize);
-	m->intab = fillintab(file, m, (int*)mlx_get_data_addr(m->img, &m->bits,
-				&m->size, &m->endian));
-//	m->btab = ft_create_tab(m);
+	m->intab = (int*)mlx_get_data_addr(m->img, &m->bits, &m->size, &m->endian));
+	m->btab = ft_create_tab(m);
 	return (m);
 }

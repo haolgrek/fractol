@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 11:39:41 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/21 17:32:04 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/21 22:33:02 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		main(int argc, char **argv)
 /*	else if (ft_strcmp(argv[1], "burningship") == 0)
 		trace(m, "b");*/
 	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
-//	mlx_hook(m->win, 2, 1, keys, m);
+	mlx_hook(m->win, 2, 1, keys, m);
 	mlx_loop(m->mlx);
 	return (0);
 }
