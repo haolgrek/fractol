@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/19 23:09:36 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/21 19:28:46 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,18 @@ int		*init_colors()
 	return (cols);
 }
 
+void	init_mandelbrot(t_mlx *m)
+{
+	m->x1 = -2.1;
+	m->x2 = 0.6;
+	m->y1 = -1.2;
+	m->y2 = 1.2;
+	m->zoom = 400;
+	m->iter_max = 50;
+	m->image_x = (m->x2 - m->x1) * m->zoom;
+	m->image_y = (m->y2 - m->y1) * m->zoom;
+}
+
 int		*fillintab(char *file, t_mlx *m, int *intab)
 {
 //	if (ft_strcmp(file, "julia") == 0)
@@ -78,8 +90,9 @@ int		*fillintab(char *file, t_mlx *m, int *intab)
 	m->colors = init_colors();
 	if (ft_strcmp(file, "mandelbrot") == 0)
 	{
+		init_mandelbrot(m);
 		ft_putendl("in fillintab");
-		mandelbrot(m, intab);
+		mandelbrot(m);
 		intab[0] = 0xFFFFFF;
 		intab[1025] = 0xFFFFFF;
 		ft_putendl("out fillintab");
@@ -112,6 +125,22 @@ int		*fillintab(char *file, t_mlx *m, int *intab)
 	}
 	return (intab);
 }*/
+/*
+int		**ft_create_btab(t_mlx *m)
+{
+	int	**btab;
+	int	i;
+
+	i = 0;
+	btab = (int**)malloc(sizeof(int*) * ((int)m->image_y + 1));
+	while (i < (int)m->image_y)
+	{
+		btab[i] = &m->intab[i * (int)image_x]
+		i++;
+	}
+	btab[i] = NULL;
+	return (btab);
+}*/
 
 t_mlx	*init_mlx(char *file)
 {
@@ -135,5 +164,6 @@ t_mlx	*init_mlx(char *file)
 	m->img = mlx_new_image(m->mlx, m->xsize, m->ysize);
 	m->intab = fillintab(file, m, (int*)mlx_get_data_addr(m->img, &m->bits,
 				&m->size, &m->endian));
+//	m->btab = ft_create_tab(m);
 	return (m);
 }

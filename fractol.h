@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 11:32:29 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/19 23:03:41 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/21 17:46:12 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,22 @@ typedef struct		s_mlx
 	int				color;
 	int				*colors;
 	char			*data;
+	double			x1;
+	double			x2;
+	double			y1;
+	double			y2;
+	int				zoom;
+	int				iter_max;
+	int				image_x;
+	int				image_y;
+	int				x;
+	int				y;
+	int				c_r;
+	int				c_i;
+	int				z_r;
+	int				z_i;
+	int				i;
+	int				tmp;
 }					t_mlx;
 
 void				bresenham_x(t_mlx *m, t_data *data);
@@ -81,7 +97,7 @@ int					checkline(char *str);
 void				other_events(int keycode, t_mlx *m);
 void				reset(t_mlx *m);
 int					*zerotab(t_mlx *m);
-void				mandelbrot(t_mlx *m, int *intab);
+void				mandelbrot(t_mlx *m);
 void				julia(t_mlx *m);
 void				burningship(t_mlx *m);
 

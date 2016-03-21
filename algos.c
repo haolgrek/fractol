@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 14:29:27 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/19 23:49:37 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/21 18:22:46 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	trace(int tab, t_mlx *m, int i)
 
 }*/
 
-void	mandelbrot(t_mlx *m, int *intab)
+void	mandelbrot(t_mlx *m)
 {
-	double	x1;
+/*	double	x1;
 	double	x2;
 	double	y1;
 	double	y2;
@@ -44,8 +44,9 @@ void	mandelbrot(t_mlx *m, int *intab)
 	int	z_i;
 	int	i;
 	int	tmp;
+//	int **btab;*/
 
-	x1 = -2.1;
+/*	x1 = -2.1;
 	x2 = 0.6;
 	y1 = -1.2;
 	y2 = 1.2;
@@ -54,40 +55,55 @@ void	mandelbrot(t_mlx *m, int *intab)
 	ft_putendl("bef imxy");
 	ft_putnbr(m->xsize);
 	image_x = (x2 - x1) * zoom;
-	image_y = (y2 - y1) * zoom;
+	image_y = (y2 - y1) * zoom;*/
 	ft_putendl("after imxy");
+//	btab = (int**)malloc(sizeof(int*) * ((int)image_y + 1));
 
-	x = 0;
-	while (x < image_x)
+	m->x = 0;
+	while (m->x < m->image_x)
 	{
 		ft_putendl("in while 1");
-		y= 0;
-		while (y < image_y)
+		m->y= 0;
+		while (m->y < m->image_y)
 		{
 			ft_putnbr(m->xsize);
 			ft_putendl("in while 2");
-			c_r = x / zoom + x1;
-			c_i = y / zoom + y1;
-			z_r = 0;
-			z_i = 0;
-			i = 0;
-			while ((z_r * z_r + z_i * z_i) < 4 && i < iter_max)
+			m->c_r = m->x / m->zoom + m->x1;
+			ft_putendl("in while 2");
+			m->c_i = m->y / m->zoom + m->y1;
+			ft_putendl("in while 2");
+			m->z_r = 0;
+			m->z_i = 0;
+			m->i = 0;
+			ft_putendl("in while 2");
+			while ((m->z_r * m->z_r + m->z_i * m->z_i) < 4 && m->i < m->iter_max)
 			{
-				tmp = z_r;
-				z_r = z_r * z_r - z_i * z_i + c_r;
-				z_i = 2 * z_i * tmp + c_i;
-				i++;
+				ft_putendl("in while 3");
+				m->tmp = m->z_r;
+				ft_putendl("in while 3");
+				m->z_r = m->z_r * m->z_r - m->z_i * m->z_i + m->c_r;
+				ft_putendl("in while 3");
+				m->z_i = 2 * m->z_i * m->tmp + m->c_i;
+				ft_putendl("in while 3");
+				m->i++;
+				ft_putendl("in while 3");
 			}
-			if (i == iter_max)
+			if (m->i == m->iter_max)
 			{
-				intab[x + y * m->xsize] = 0x00FFFFFF;
+				ft_putendl("in if 1");
+				m->intab[m->x + m->y * m->ysize] = 0x00FFFFFF;
 			}
 			else
-				intab[x + y * m->xsize] = m->colors[i];
-			y++;
+			{
+				ft_putendl("in if 2");
+				m->intab[m->x + m->y * m->ysize] = m->colors[m->i];
+				ft_putendl("in if 2");
+			}
+			m->y++;
 		}
-		x++;
+		m->x++;
 	}
+	ft_putendl("at end");
 }
 
 /*void	burningship(t_mlx *m)
