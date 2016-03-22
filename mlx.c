@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/22 18:08:10 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/22 22:31:20 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,17 @@ void	init_mandelbrot(t_mlx *m)
 	m->image_y = (m->y2 - m->y1) * m->zoom;
 }
 
+void	init_julia(t_mlx *m)
+{
+
+}
+
+void	init_burningship(t_mlx *m)
+{
+
+}
+
+
 int		**ft_create_btab(t_mlx *m)
 {
 	int	**btab;
@@ -111,7 +122,7 @@ void	do_fract(char *file, t_mlx *m)
 		init_mandelbrot(m);
 		mandelbrot(m);
 	}
-/*	else if (ft_strcmp("julia", file) == 0)
+	else if (ft_strcmp("julia", file) == 0)
 	{
 		init_julia(m);
 		julia(m);
@@ -120,7 +131,7 @@ void	do_fract(char *file, t_mlx *m)
 	{
 		init_burningship(m);
 		burningship(m);
-	}*/
+	}
 }
 
 t_mlx	*init_mlx(char *file)
