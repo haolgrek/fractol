@@ -6,11 +6,18 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/22 14:06:11 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/22 15:47:11 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	other_events(int keycode, t_mlx *m)
+{
+	if (keycode == 89 || keycode == 91)
+		mandelbrot(m);
+	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
+}
 
 void	directions(int keycode, t_mlx *m)
 {
@@ -37,14 +44,14 @@ int		keys(int keycode, t_mlx *m)
 		m->color -= 512;
 	else if (keycode == 84)
 		m->color += 512;
-	else if (keycode == 89 && m->height > -3)
-		m->height--;
-	else if (keycode == 91 && m->height < 3)
-		m->height++;
+	else if (keycode == 89 && m->iter_max > 10)
+		m->iter_max = m->iter_max - 10;
+	else if (keycode == 91)
+		m->iter_max = m->iter_max + 10;
 //	else if (keycode == 15)
 //		reset(m);
 	mlx_clear_window(m->mlx, m->win);
-//	other_events(keycode, m);
+	other_events(keycode, m);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
 	return (0);
 }
@@ -107,10 +114,10 @@ int		**ft_create_btab(t_mlx *m)
 	int	i;
 
 	i = 0;
-	btab = malloc(sizeof(int*) * 1000);
-	while (i < 1000)
+	btab = malloc(sizeof(int*) * m->xsize);
+	while (i < m->xsize)
 	{
-		btab[i] = &m->intab[i * 1000];
+		btab[i] = &m->intab[i * m->xsize];
 		i++;
 	}
 	btab[i] = NULL;
@@ -128,8 +135,8 @@ t_mlx	*init_mlx(char *file)
 	m->color = 16707215;
 	m->data = file;
 	m->mlx = mlx_init();
-	m->xsize = 1000;
-	m->ysize = 1000;
+	m->xsize = 1200;
+	m->ysize = 1200;
 //	m->maxx = max[0];
 //	m->maxy = max[1];
 	m->imgx = 0;
