@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/21 23:35:01 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/22 14:06:11 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	init_mandelbrot(t_mlx *m)
 	m->image_y = (m->y2 - m->y1) * m->zoom;
 }
 
-int		*fillintab(char *file, t_mlx *m, int *intab)
+/*int		*fillintab(char *file, t_mlx *m, int *intab)
 {
 //	if (ft_strcmp(file, "julia") == 0)
 //		julia(m);
@@ -92,16 +92,14 @@ int		*fillintab(char *file, t_mlx *m, int *intab)
 	{
 		init_mandelbrot(m);
 		ft_putendl("in fillintab");
-		mandelbrot(m, intab);
-		m->intab = malloc(sizeof(int) * 900000);
-		intab[0] = 0xFFFFFF;
-		intab[1025] = 0xFFFFFF;
+		mandelbrot(m);
+		m->intab = malloc(sizeof(int) * 1000000);
 		ft_putendl("out fillintab");
 	}
 //	else if (ft_strcmp(file, "burningship") == 0)
 //		burningship(m);
 	return (intab);
-}
+}*/
 
 int		**ft_create_btab(t_mlx *m)
 {
@@ -109,10 +107,10 @@ int		**ft_create_btab(t_mlx *m)
 	int	i;
 
 	i = 0;
-	btab = (int**)malloc(sizeof(int*) * ((int)m->image_y + 1));
-	while (i < (int)m->image_y)
+	btab = malloc(sizeof(int*) * 1000);
+	while (i < 1000)
 	{
-		btab[i] = &m->intab[i * (int)m->image_x];
+		btab[i] = &m->intab[i * 1000];
 		i++;
 	}
 	btab[i] = NULL;
@@ -139,7 +137,13 @@ t_mlx	*init_mlx(char *file)
 //	m->gap = 1;
 	m->win = mlx_new_window(m->mlx, m->xsize, m->ysize, "Fractol");
 	m->img = mlx_new_image(m->mlx, m->xsize, m->ysize);
-	m->intab = (int*)mlx_get_data_addr(m->img, &m->bits, &m->size, &m->endian));
-	m->btab = ft_create_tab(m);
+	m->intab = (int*)mlx_get_data_addr(m->img, &m->bits, &m->size, &m->endian);
+	m->btab = ft_create_btab(m);
+	init_mandelbrot(m);
+	mandelbrot(m);
+	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
+	ft_putendl("image put");
+	mlx_hook(m->win, 2, 1, keys, m);
+	mlx_loop(m->mlx);
 	return (m);
 }

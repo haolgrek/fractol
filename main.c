@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 11:39:41 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/21 22:33:02 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/22 13:54:53 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@ int		main(int argc, char **argv)
 /*	if (ft_strcmp(argv[1], "julia") == 0)
 		trace(m, "j");*/
 //	if (ft_strcmp(argv[1], "mendelbrot") == 0)
-//		mandelbrot(m, intab);
+//		mandelbrot(m);
 /*	else if (ft_strcmp(argv[1], "burningship") == 0)
 		trace(m, "b");*/
-	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
-	mlx_hook(m->win, 2, 1, keys, m);
-	mlx_loop(m->mlx);
+//	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
+//	ft_putendl("image put");
+//	mlx_hook(m->win, 2, 1, keys, m);
+//	mlx_loop(m->mlx);
+//	ft_putendl("loop end");
 	return (0);
 }
