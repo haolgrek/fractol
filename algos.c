@@ -6,20 +6,11 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 14:29:27 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/22 15:26:57 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/22 17:49:44 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-/*void	trace(int tab, t_mlx *m, int i)
-{
-	ft_putendl("trace in");
-	ft_putendl("intab[0] =");
-	ft_putnbr(m->intab[0]);
-	m->intab[tab] = i * 100;
-	ft_putendl("trace out");
-}*/
 
 /*void	julia(t_mlx *m)
 {

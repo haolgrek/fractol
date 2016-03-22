@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 11:39:41 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/22 13:54:53 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/22 17:49:48 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 int		main(int argc, char **argv)
 {
-//	t_data	*file;
 	t_mlx	*m;
 	int		*intab;
 
@@ -36,16 +35,5 @@ int		main(int argc, char **argv)
 	ft_putendl("args ok");
 	m = init_mlx(argv[1]);
 	ft_putendl("init ok");
-/*	if (ft_strcmp(argv[1], "julia") == 0)
-		trace(m, "j");*/
-//	if (ft_strcmp(argv[1], "mendelbrot") == 0)
-//		mandelbrot(m);
-/*	else if (ft_strcmp(argv[1], "burningship") == 0)
-		trace(m, "b");*/
-//	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
-//	ft_putendl("image put");
-//	mlx_hook(m->win, 2, 1, keys, m);
-//	mlx_loop(m->mlx);
-//	ft_putendl("loop end");
 	return (0);
 }
