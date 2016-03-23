@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/22 22:31:20 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/24 00:06:07 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,24 @@ int		keys(int keycode, t_mlx *m)
 	return (0);
 }
 
+int		mouse(int button, int x, int y, t_mlx *m)
+{
+	int i;
+
+	i = button;
+	ft_putnbr(x);
+	ft_putchar(',');
+	ft_putnbr(y);
+	ft_putchar('\n');
+	ft_putendl("gre\n");
+	m->z_r = 0 + x / 1000;
+	ft_putendl("gre\n");
+	mandelbrot(m);
+	ft_putendl("fak\n");
+	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
+	return (1);
+}
+
 int		*init_colors()
 {
 	int	*cols;
@@ -90,12 +108,12 @@ void	init_mandelbrot(t_mlx *m)
 
 void	init_julia(t_mlx *m)
 {
-
+	m->data = "julia";
 }
 
 void	init_burningship(t_mlx *m)
 {
-
+	m->data = "burningship";
 }
 
 
@@ -154,6 +172,7 @@ t_mlx	*init_mlx(char *file)
 	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
 	ft_putendl("image put");
 	mlx_hook(m->win, 2, 1, keys, m);
+	mlx_hook(m->win, 6, 1L<<6, mouse, m);
 	mlx_loop(m->mlx);
 	return (m);
 }

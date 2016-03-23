@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 14:29:27 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/22 22:22:55 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/24 00:07:10 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	julia(t_mlx *m)
 {
 	m->x = 0;
-	ft_putchar('\n');
 	while (m->x < m->xsize)
 	{
 		m->y= 0;
@@ -41,7 +40,6 @@ void	julia(t_mlx *m)
 void	mandelbrot(t_mlx *m)
 {
 	m->x = 0;
-	ft_putchar('\n');
 	while (m->x < m->xsize)
 	{
 		m->y= 0;
@@ -69,7 +67,6 @@ void	mandelbrot(t_mlx *m)
 void	burningship(t_mlx *m)
 {
 	m->x = 0;
-	ft_putchar('\n');
 	while (m->x < m->xsize)
 	{
 		m->y= 0;
