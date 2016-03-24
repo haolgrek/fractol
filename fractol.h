@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 11:32:29 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/22 18:03:54 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/24 19:01:00 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct		s_mlx
 	double			i;
 	double			tmp;
 	int				**btab;
+	int				j;
+	int				k;
 }					t_mlx;
 
 void				bresenham_x(t_mlx *m, t_data *data);
@@ -101,6 +103,6 @@ int					*zerotab(t_mlx *m);
 void				mandelbrot(t_mlx *m);
 void				julia(t_mlx *m);
 void				burningship(t_mlx *m);
-void				do_fract(char *file, t_mlx *m);
+void				do_fract(t_mlx *m);
 
 #endif
