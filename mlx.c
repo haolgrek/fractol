@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/24 22:28:11 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/24 23:05:10 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	other_events(int keycode, t_mlx *m)
 		if (m->nfract == 1)
 			mandelbrot(m);
 		else if (m->nfract == 2)
-		{
 			julia(m);
-		}
 		else if (m->nfract == 3)
 			burningship(m);
 	}
