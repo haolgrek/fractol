@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/24 23:05:10 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/25 20:09:38 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	other_events(int keycode, t_mlx *m)
 			julia(m);
 		else if (m->nfract == 3)
 			burningship(m);
+		else if (m->nfract == 4)
+			buddhabrot(m);
 	}
 	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
 }
@@ -78,15 +80,54 @@ int		mouse(int x, int y, t_mlx *m)
 	return (0);
 }
 
+void	zoom_in(int x, int y, t_mlx *m)
+{
+	double	tmp[4];
+	double	newx;
+	double	newy;
+
+	tmp[0] = m->x1;
+	tmp[1] = m->x2;
+	tmp[2] = m->y1;
+	tmp[3] = m->y2;
+	newx = m->x1 + x * (m->x2 - m->x1) / m->image_x;
+	newy = m->y1 + y * (m->y2 - m->y1) / m->image_y;
+	m->x1 = newx - (tmp[1] - tmp[0]) / 4;
+	m->x2 = newx + (tmp[1] - tmp[0]) / 4;
+	m->y1 = newy - (tmp[3] - tmp[2]) / 4;
+	m->y2 = newy + (tmp[3] - tmp[2]) / 4;
+	m->zoom = m->zoom * 2;
+	m->iter_max = m->iter_max * 2;
+}
+
+void	zoom_out(int x, int y, t_mlx *m)
+{
+	double	tmp[4];
+	double	newx;
+	double	newy;
+
+	tmp[0] = m->x1;
+	tmp[1] = m->x2;
+	tmp[2] = m->y1;
+	tmp[3] = m->y2;
+	newx = m->x1 + x * (m->x2 - m->x1) / m->image_x;
+	newy = m->y1 + y * (m->y2 - m->y1) / m->image_y;
+	m->x1 = newx - (tmp[1] - tmp[0]);
+	m->x2 = newx + (tmp[1] - tmp[0]);
+	m->y1 = newy - (tmp[3] - tmp[2]);
+	m->y2 = newy + (tmp[3] - tmp[2]);
+	m->zoom = m->zoom / 2;
+	m->iter_max = m->iter_max / 2;
+}
+
 int		mousebutton(int button, int x, int y, t_mlx *m)
 {
 	int	i;
 
 	if ((button == 5 || button == 1) && x <= (int)m->image_x && y <= (int)m->image_y)
-	{
-		m->zoom = m->zoom + 20;
-		m->iter_max = m->iter_max + 20;
-	}
+		zoom_in(x, y, m);
+	if ((button == 4 || button == 2) && x <= (int)m->image_x && y <= (int)m->image_y)
+		zoom_out(x, y, m);
 	mlx_clear_window(m->mlx, m->win);
 	other_events(89, m);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
@@ -131,6 +172,17 @@ void	init_burningship(t_mlx *m)
 	m->image_y = (m->y2 - m->y1) * m->zoom;
 }
 
+void	init_buddhabrot(t_mlx *m)
+{
+	m->x1 = -2.1;
+	m->x2 = 0.6;
+	m->y1 = -1.2;
+	m->y2 = 1.2;
+	m->zoom = 400;
+	m->iter_max = 5000;
+	m->image_x = (m->x2 - m->x1) * m->zoom;
+	m->image_y = (m->y2 - m->y1) * m->zoom;
+}
 
 int		**ft_create_btab(t_mlx *m)
 {
@@ -167,6 +219,12 @@ void	do_fract(t_mlx *m)
 		m->nfract = 3;
 		init_burningship(m);
 		burningship(m);
+	}
+	else if (ft_strcmp("buddhabrot", m->data) == 0)
+	{
+		m->nfract = 4;
+		init_buddhabrot(m);
+		buddhabrot(m);
 	}
 }
 

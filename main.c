@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 11:39:41 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/24 17:48:01 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/25 18:33:27 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	if (ft_strcmp(argv[1], "julia") != 0 && ft_strcmp(argv[1], "mandelbrot")
-			!= 0 && ft_strcmp(argv[1], "burningship") != 0)
+			!= 0 && ft_strcmp(argv[1], "burningship") != 0 && ft_strcmp(argv[1], "buddhabrot") != 0)
 	{
 		ft_putendl("Incorrect argument");
 		ft_putendl("Valid arguments are: julia, mandelbrot, burningship");
