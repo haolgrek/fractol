@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 11:32:29 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/25 18:31:58 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/26 18:28:58 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,11 @@ typedef struct		s_mlx
 	double			k;
 }					t_mlx;
 
-//void				bresenham_x(t_mlx *m, t_data *data);
-//void				bresenham_y(t_mlx *m, t_data *data);
-//t_data				*parse(char *file);
-//t_data				*setlst(int fd, char *line);
 t_mlx				*init_mlx(char *file);
 void				other_events(int keycode, t_mlx *m);
 int					*fillintab(char *file, t_mlx *m, int *intab);
 int					*blacktab(t_mlx *m);
 int					keys(int keycode, t_mlx *m);
-//t_data				*ft_create_elem(int *tab, int len, int y);
 int					checkline(char *str);
 void				other_events(int keycode, t_mlx *m);
 void				reset(t_mlx *m);
@@ -104,7 +99,10 @@ int					*zerotab(t_mlx *m);
 void				mandelbrot(t_mlx *m);
 void				julia(t_mlx *m);
 void				burningship(t_mlx *m);
-void				buddhabrot(t_mlx *m);
+void				douady(t_mlx *m);
+void				doublebrot(t_mlx *m);
+void				galaxy(t_mlx *m);
+void				racinesinh(t_mlx *m);
 void				do_fract(t_mlx *m);
 
 #endif

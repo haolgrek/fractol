@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 19:56:14 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/25 20:09:38 by rluder           ###   ########.fr       */
+/*   Updated: 2016/03/26 19:24:22 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	other_events(int keycode, t_mlx *m)
 {
-	if (keycode == 89 || keycode == 91 || keycode == 69 || keycode == 78)
+	if (keycode == 89 || keycode == 91 || keycode == 69 || keycode == 78 || keycode == 83 || keycode == 84 || (keycode > 122 && keycode < 127))
 	{
 		if (m->nfract == 1)
 			mandelbrot(m);
@@ -23,7 +23,13 @@ void	other_events(int keycode, t_mlx *m)
 		else if (m->nfract == 3)
 			burningship(m);
 		else if (m->nfract == 4)
-			buddhabrot(m);
+			douady(m);
+		else if (m->nfract == 5)
+			doublebrot(m);
+		else if (m->nfract == 6)
+			galaxy(m);
+		else if (m->nfract == 7)
+			racinesinh(m);
 	}
 	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
 }
@@ -31,13 +37,25 @@ void	other_events(int keycode, t_mlx *m)
 void	directions(int keycode, t_mlx *m)
 {
 	if (keycode == 126)
-		m->imgy -= 10;
+	{
+		m->y2 = m->y2 + 0.0002 * m->zoom;
+		m->y1 = m->y1 + 0.0002 * m->zoom;
+	}
 	else if (keycode == 124)
-		m->imgx += 10;
+	{
+		m->x2 = m->x2 - 0.0002 * m->zoom;
+		m->x1 = m->x1 - 0.0002 * m->zoom;
+	}
 	else if (keycode == 125)
-		m->imgy += 10;
+	{
+		m->y2 = m->y2 - 0.0002 * m->zoom;
+		m->y1 = m->y1 - 0.0002 * m->zoom;
+	}
 	else if (keycode == 123)
-		m->imgx -= 10;
+	{
+		m->x2 = m->x2 + 0.0002 * m->zoom;
+		m->x1 = m->x1 + 0.0002 * m->zoom;
+	}
 }
 
 int		keys(int keycode, t_mlx *m)
@@ -50,9 +68,9 @@ int		keys(int keycode, t_mlx *m)
 	else if (keycode == 78 && m->zoom > 10)
 		m->zoom = m->zoom - 10;
 	else if (keycode == 83)
-		m->color -= 512;
+		m->color -= 800;
 	else if (keycode == 84)
-		m->color += 512;
+		m->color += 800;
 	else if (keycode == 89 && m->iter_max > 10)
 		m->iter_max = m->iter_max - 10;
 	else if (keycode == 91)
@@ -69,12 +87,8 @@ int		mouse(int x, int y, t_mlx *m)
 	{
 		m->j = x * 0.0005;
 		m->k = y * 0.0005;
-		ft_putnbr(m->j);
-		ft_putchar(';');
-		ft_putnbr(m->k);
-		ft_putchar('\n');
 		mlx_clear_window(m->mlx, m->win);
-		julia(m);
+		other_events(89, m);
 		mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
 	}
 	return (0);
@@ -172,18 +186,6 @@ void	init_burningship(t_mlx *m)
 	m->image_y = (m->y2 - m->y1) * m->zoom;
 }
 
-void	init_buddhabrot(t_mlx *m)
-{
-	m->x1 = -2.1;
-	m->x2 = 0.6;
-	m->y1 = -1.2;
-	m->y2 = 1.2;
-	m->zoom = 400;
-	m->iter_max = 5000;
-	m->image_x = (m->x2 - m->x1) * m->zoom;
-	m->image_y = (m->y2 - m->y1) * m->zoom;
-}
-
 int		**ft_create_btab(t_mlx *m)
 {
 	int	**btab;
@@ -220,11 +222,29 @@ void	do_fract(t_mlx *m)
 		init_burningship(m);
 		burningship(m);
 	}
-	else if (ft_strcmp("buddhabrot", m->data) == 0)
+	else if (ft_strcmp("douady", m->data) == 0)
 	{
 		m->nfract = 4;
-		init_buddhabrot(m);
-		buddhabrot(m);
+		init_julia(m);
+		douady(m);
+	}
+	else if (ft_strcmp("doublebrot", m->data) == 0)
+	{
+		m->nfract = 5;
+		init_julia(m);
+		doublebrot(m);
+	}
+	else if (ft_strcmp("galaxy", m->data) == 0)
+	{
+		m->nfract = 6;
+		init_julia(m);
+		galaxy(m);
+	}
+	else if (ft_strcmp("racinesinh", m->data) == 0)
+	{
+		m->nfract = 7;
+		init_julia(m);
+		racinesinh(m);
 	}
 }
 
@@ -239,13 +259,14 @@ t_mlx	*init_mlx(char *file)
 	m->ysize = 1200;
 	m->imgx = 0;
 	m->imgy = 0;
+	m->color = 0xFFF000;
 	m->win = mlx_new_window(m->mlx, m->xsize, m->ysize, "Fractol");
 	m->img = mlx_new_image(m->mlx, m->xsize, m->ysize);
 	m->intab = (int*)mlx_get_data_addr(m->img, &m->bits, &m->size, &m->endian);
 	m->btab = ft_create_btab(m);
 	do_fract(m);
 	mlx_hook(m->win, 2, 1, keys, m);
-	if (m->nfract == 2)
+	if (m->nfract >= 2 )
 		mlx_hook(m->win, 6, (1L << 6), mouse, m);
 	mlx_mouse_hook(m->win, mousebutton, m);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, m->imgx, m->imgy);
